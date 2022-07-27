@@ -12,7 +12,7 @@ import ddf.minim.ugens.*;
 
 float paperX, paperY, paperWidth, paperHeight, penDiameter;
 float color1X, color1Y, color1Width, color1Height, color2X, color2Y, color2Width, color2Height, color3X, color3Y, color3Width, color3Height, color4X, color4Y, color4Width, color4Height, color5X, color5Y, color5Width, color5Height, color6X, color6Y, color6Width, color6Height, color7X, color7Y, color7Width, color7Height, color8X, color8Y, color8Width, color8Height, color9X, color9Y, color9Width, color9Height ;
-float eraserX, eraserY, eraserWidth, eraserHeight ;
+float bgColorX, bgColorY, bgColorWidth, bgColorHeight, eraserX, eraserY, eraserWidth, eraserHeight ;
 color defaultColor = #FFFFFF, penColor, color1, color2, color3, color4, color5, color6, color7, color8, color9;
 color eraserFill, bgColor;
 boolean  draw=false, draw1 = false;
@@ -101,13 +101,19 @@ void setup() {
   color9Width = width/15;
   color9Height = height/15;
   
-  eraserX = width/5;
+  bgColorX = width/5;
+  bgColorY = height*4/5;
+  bgColorWidth = width/15;
+  bgColorHeight = height/15;
+  
+  eraserX = width*2/5 ;
   eraserY = height*4/5;
   eraserWidth = width/15;
   eraserHeight = height/15;
-  
-  bgColor = color( random(255), random(255), random(255) ) ;
-  eraserFill = bgColor;
+
+  bgColor = #FFFFFF;
+  //bgColor = color( random(255), random(255), random(255) ) ;
+  //eraserFill = bgColor;
   
   
   
@@ -157,7 +163,10 @@ void draw() {
   rect(color9X, color9Y, color9Width, color9Height);
   fill(defaultColor);
   
-  fill(eraserFill);
+  fill(bgColor);
+  rect(bgColorX, bgColorY, bgColorWidth, bgColorHeight);
+  
+  fill(defaultColor);
   rect(eraserX, eraserY, eraserWidth, eraserHeight);
   
   
@@ -179,7 +188,7 @@ void keyPressed() {} // End keyPressed()
 void mousePressed() {
   
 
-  bgColor = color( random(255), random(255), random(255) ) ;
+  
   
   
   //if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) {
@@ -210,12 +219,19 @@ void mousePressed() {
   if (mouseX>color7X && mouseX < color7X + color7Width && mouseY > color7Y && mouseY < color7Y + color7Height) { penColor = color7; penDiameter = width/100; }
   if (mouseX>color8X && mouseX < color8X + color8Width && mouseY > color8Y && mouseY < color8Y + color8Height) { penColor = color8; penDiameter = width/100; }
   if (mouseX>color9X && mouseX < color9X + color9Width && mouseY > color6Y && mouseY < color9Y + color9Height) { penColor = color9; penDiameter = width/100; }
+  if (mouseX>bgColorX && mouseX < bgColorX + bgColorWidth && mouseY > bgColorY && mouseY < bgColorY + bgColorHeight) { 
+    bgColor = color( random(255), random(255), random(255) ) ;
+    fill(bgColor);
+    rect(paperX, paperY, paperWidth, paperHeight);
+  //penColor = bgColor;
+  //penDiameter = width/50; 
+  }
   if (mouseX>eraserX && mouseX < eraserX + eraserWidth && mouseY > eraserY && mouseY < eraserY + eraserHeight) { 
-  fill(bgColor);
-  rect(paperX, paperY, paperWidth, paperHeight);
-  penColor = bgColor;
+    penColor = bgColor;
     penDiameter = width/50; 
   }
+  
+  
   
   
   

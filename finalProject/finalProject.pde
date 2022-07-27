@@ -203,8 +203,10 @@ void mousePressed() {
   if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) {
     if (draw1 == true) {
       draw1 = false;
+      draw = true;
     } else {
       draw1 = true;
+       draw = false;
     }
    }
    
@@ -223,8 +225,8 @@ void mousePressed() {
     bgColor = color( random(255), random(255), random(255) ) ;
     fill(bgColor);
     rect(paperX, paperY, paperWidth, paperHeight);
-  //penColor = bgColor;
-  //penDiameter = width/50; 
+    penColor = bgColor;
+
   }
   if (mouseX>eraserX && mouseX < eraserX + eraserWidth && mouseY > eraserY && mouseY < eraserY + eraserHeight) { 
     penColor = bgColor;

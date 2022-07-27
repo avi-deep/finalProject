@@ -14,8 +14,10 @@ float paperX, paperY, paperWidth, paperHeight, penDiameter;
 float color1X, color1Y, color1Width, color1Height, color2X, color2Y, color2Width, color2Height, color3X, color3Y, color3Width, color3Height, color4X, color4Y, color4Width, color4Height, color5X, color5Y, color5Width, color5Height, color6X, color6Y, color6Width, color6Height, color7X, color7Y, color7Width, color7Height, color8X, color8Y, color8Width, color8Height, color9X, color9Y, color9Width, color9Height ;
 float bgColorX, bgColorY, bgColorWidth, bgColorHeight, eraserX, eraserY, eraserWidth, eraserHeight ;
 color defaultColor = #FFFFFF, penColor, color1, color2, color3, color4, color5, color6, color7, color8, color9;
+float bgTextX, bgTextY, bgTextWidth, bgTextHeight, pen2X,pen2Y, pen2Width,pen2Height, pen3X,pen3Y, pen3Width, pen3Height, pen4X,pen4Y, pen4Width, pen4Height;
+String  bgText = "Change bgColor";
 color eraserFill, bgColor;
-boolean  draw=false, draw1 = false;
+boolean  draw=false, draw1 = false, draw2 = false ;
 
 //
 void setup() {
@@ -101,9 +103,24 @@ void setup() {
   color9Width = width/15;
   color9Height = height/15;
   
-  bgColorX = width/5;
-  bgColorY = height*4/5;
-  bgColorWidth = width/15;
+  pen2X = width - width/5;
+  pen2Y = height*3/5;
+  pen2Width = width - width/5;
+  pen2Height = height/15;
+  
+  pen3X = width - width/5;
+  pen3Y = height*4/5;
+  pen3Width = width - width/5;
+  pen3Height = height/15;
+  
+  pen4X = width - width/5;
+  pen4Y = height*5/7;
+  pen4Width = width - width/5;
+  pen4Height = height/15;
+  
+  bgColorX = width - width/5;
+  bgColorY = height*2/5;
+  bgColorWidth = width - width/5;
   bgColorHeight = height/15;
   
   eraserX = width*2/5 ;
@@ -114,8 +131,7 @@ void setup() {
   bgColor = #FFFFFF;
   //bgColor = color( random(255), random(255), random(255) ) ;
   //eraserFill = bgColor;
-  
-  
+
   
   color1 = #000000 ; 
   color2 = #F50F0F ;
@@ -169,7 +185,17 @@ void draw() {
   fill(defaultColor);
   rect(eraserX, eraserY, eraserWidth, eraserHeight);
   
+  fill(#000000);
+  text(bgText, bgTextX, bgTextY, bgTextWidth, bgTextHeight);
+  bgTextX = width- width/6;
+  bgTextY = height*3/7;
+  bgTextWidth = width- width/5;
+  bgTextHeight = height/10;
   
+  rect(pen2X,pen2Y, pen2Width,pen2Height);
+  rect(pen3X,pen3Y, pen3Width, pen3Height);
+  rect(pen4X,pen4Y, pen4Width, pen4Height);
+
   
   fill(defaultColor);
   
@@ -178,9 +204,12 @@ void draw() {
   fill(penColor);
   if (draw1 == true && mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight ) ellipse(mouseX, mouseY, penDiameter, penDiameter);
   if ( draw == true && mouseX>paperX && mouseX<paperX+paperWidth && mouseY>paperY && mouseY<paperY+paperHeight) line (mouseX, mouseY, pmouseX, pmouseY); 
+  if ( draw2 == true && mouseX>paperX && mouseX<paperX+paperWidth && mouseY>paperY && mouseY<paperY+paperHeight) rect (mouseX, mouseY, penDiameter, penDiameter); 
 
   fill(defaultColor);
-  stroke(defaultColor);
+  stroke(#000000);
+  
+  
 } //End draw()
 //
 void keyPressed() {} // End keyPressed()
@@ -200,15 +229,40 @@ void mousePressed() {
   // } //END
    
     
-  if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) {
-    if (draw1 == true) {
-      draw1 = false;
-      draw = true;
-    } else {
-      draw1 = true;
-       draw = false;
-    }
+  //if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) {
+  //  if (draw == true) {
+  //    draw1 = true;
+  //    draw = false;
+  //  } else {
+  //    draw1 = false;
+  //     draw = true;
+  //  }
+    
+  //   if (draw1 == true) {
+  //    draw1 = false;
+  //    draw = true;
+  //  } else {
+  //    draw1 = true;
+  //     draw = false;
+  //  }
+  // }
+  
+ 
+   
+   
+   if (mouseX>pen2X && mouseX < pen2X + pen2Width && mouseY >pen2Y && mouseY < pen2Y + pen2Height) {
+     if (draw1 == true) { draw1 = false; } else { draw1 = true; draw2 = false; draw = false;}
    }
+   
+   if (mouseX>pen3X && mouseX < pen3X + pen3Width && mouseY >pen3Y && mouseY < pen3Y + pen3Height) {
+     if (draw == true) { draw = false; } else { draw = true; draw2 = false; draw1 = false;}
+   }
+   
+   if (mouseX>pen4X && mouseX < pen4X + pen4Width && mouseY >pen4Y && mouseY < pen4Y + pen4Height) {
+     if (draw2 == true) { draw2 = false; } else { draw2 = true; draw1 = false; draw = false;}
+   }
+   
+   //pen2X,pen2Y, pen2Width,pen2Height
    
    // CHANGING PEN COLORS
    

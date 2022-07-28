@@ -144,7 +144,7 @@ void setup() {
   
   img2X = width - width/5;
   img2Y  = height*7/10;
-  img2Width = width/15;
+  img2Width = 46;
   img2Height = height/15;
 
   bgColor = #FFFFFF;

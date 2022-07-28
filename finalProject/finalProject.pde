@@ -15,7 +15,8 @@ float color1X, color1Y, color1Width, color1Height, color2X, color2Y, color2Width
 float bgColorX, bgColorY, bgColorWidth, bgColorHeight, eraserX, eraserY, eraserWidth, eraserHeight ;
 color defaultColor = #FFFFFF, penColor, color1, color2, color3, color4, color5, color6, color7, color8, color9;
 float bgTextX, bgTextY, bgTextWidth, bgTextHeight, pen2X,pen2Y, pen2Width,pen2Height, pen3X,pen3Y, pen3Width, pen3Height, pen4X,pen4Y, pen4Width, pen4Height;
-String  bgText = "Change bgColor";
+float eraserTxtX, eraserTxtY, eraserTxtW, eraserTxtH;
+String bgText = "Change bgColor", eraserTxt = "Eraser";
 color eraserFill, bgColor;
 boolean  draw=false, draw1 = false, draw2 = false ;
 
@@ -52,7 +53,7 @@ void setup() {
   paperX = width*0;
   paperY = height*0;
   paperWidth =  width*3/4;
-  paperHeight = height*4/5;
+  paperHeight = height;
   penDiameter = width/100;
   
   penColor = #99F578; 
@@ -103,19 +104,19 @@ void setup() {
   color9Width = width/15;
   color9Height = height/15;
   
-  pen2X = width - width/5;
+  pen2X =  width - width/5;
   pen2Y = height*3/5;
-  pen2Width = width - width/5;
+  pen2Width = width/15;
   pen2Height = height/15;
   
-  pen3X = width - width/5;
-  pen3Y = height*4/5;
-  pen3Width = width - width/5;
+  pen3X =  width - width/7;
+  pen3Y = height*3/5;
+  pen3Width = width/15;
   pen3Height = height/15;
   
-  pen4X = width - width/5;
-  pen4Y = height*5/7;
-  pen4Width = width - width/5;
+  pen4X =  width - width/12;
+  pen4Y = height*3/5;
+  pen4Width = width/15;
   pen4Height = height/15;
   
   bgColorX = width - width/5;
@@ -123,9 +124,9 @@ void setup() {
   bgColorWidth = width - width/5;
   bgColorHeight = height/15;
   
-  eraserX = width*2/5 ;
-  eraserY = height*4/5;
-  eraserWidth = width/15;
+  eraserX =  width - width/5;
+  eraserY = height*5/10;
+  eraserWidth =  width - width/5;
   eraserHeight = height/15;
 
   bgColor = #FFFFFF;
@@ -192,9 +193,31 @@ void draw() {
   bgTextWidth = width- width/5;
   bgTextHeight = height/10;
   
+  fill(#000000);
+  text(eraserTxt, eraserTxtX, eraserTxtY, eraserTxtW, eraserTxtH);
+  eraserTxtX = width- width/6;
+  eraserTxtY = height*8/15;
+  eraserTxtW = width- width/5;
+  eraserTxtH = height/10;
+  
+ 
+ 
+  fill(defaultColor);
   rect(pen2X,pen2Y, pen2Width,pen2Height);
+  
+  fill(#ff7788);
+  ellipse(pen2X+25, pen2Y+20, penDiameter, penDiameter);
+  
+  fill(defaultColor);
   rect(pen3X,pen3Y, pen3Width, pen3Height);
+  
+  fill(#ff7788);
+  line(pen3X+25, pen3Y+15, pen3X+30, pen3Y+25);
+  fill(defaultColor);
+  
   rect(pen4X,pen4Y, pen4Width, pen4Height);
+  fill(#ff7788);
+  rect(pen4X+25, pen4Y+15, penDiameter, penDiameter);
 
   
   fill(defaultColor);
@@ -229,7 +252,7 @@ void mousePressed() {
   // } //END
    
    if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) { 
-   if (draw2 == true) { draw2 = false; } else { draw2 = true; draw1 = false; draw = false;}
+        if (draw == true) { draw = false; } else { draw = true; draw2 = false; draw1 = false;}
    }
   
    if (mouseX>pen2X && mouseX < pen2X + pen2Width && mouseY >pen2Y && mouseY < pen2Y + pen2Height) {

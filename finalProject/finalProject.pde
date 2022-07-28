@@ -9,16 +9,17 @@ import ddf.minim.ugens.*;
 
 
 //Global Variables 
-
+PImage temp;
 float paperX, paperY, paperWidth, paperHeight, penDiameter;
 float color1X, color1Y, color1Width, color1Height, color2X, color2Y, color2Width, color2Height, color3X, color3Y, color3Width, color3Height, color4X, color4Y, color4Width, color4Height, color5X, color5Y, color5Width, color5Height, color6X, color6Y, color6Width, color6Height, color7X, color7Y, color7Width, color7Height, color8X, color8Y, color8Width, color8Height, color9X, color9Y, color9Width, color9Height ;
 float bgColorX, bgColorY, bgColorWidth, bgColorHeight, eraserX, eraserY, eraserWidth, eraserHeight ;
 color defaultColor = #FFFFFF, penColor, color1, color2, color3, color4, color5, color6, color7, color8, color9;
 float bgTextX, bgTextY, bgTextWidth, bgTextHeight, pen2X,pen2Y, pen2Width,pen2Height, pen3X,pen3Y, pen3Width, pen3Height, pen4X,pen4Y, pen4Width, pen4Height;
-float eraserTxtX, eraserTxtY, eraserTxtW, eraserTxtH;
+float eraserTxtX, eraserTxtY, eraserTxtW, eraserTxtH, tempBtnX, tempBtnY, tempBtnWidth, tempBtnHeight, tempX, tempY, tempWidth, tempHeight, img2X,img2Y,img2Width,img2Height;
+float imageX1, imageY1, picWidthAdjusted1, picHeightAdjusted1;
 String bgText = "Change bgColor", eraserTxt = "Eraser";
 color eraserFill, bgColor;
-boolean  draw=false, draw1 = false, draw2 = false ;
+boolean  draw=false, draw1 = false, draw2 = false, nightMode=false ;
 
 //
 void setup() {
@@ -55,6 +56,13 @@ void setup() {
   paperWidth =  width*3/4;
   paperHeight = height;
   penDiameter = width/100;
+  
+  imageX1 = 0;
+  imageY1 = 0;
+  picWidthAdjusted1 = 568;
+  picHeightAdjusted1 = 640;
+  
+  //imageX1, imageY1, picWidthAdjusted1, picHeightAdjusted1
   
   penColor = #99F578; 
   
@@ -128,6 +136,16 @@ void setup() {
   eraserY = height*5/10;
   eraserWidth =  width - width/5;
   eraserHeight = height/15;
+  
+  tempBtnX =  width - width/5;
+  tempBtnY = height*7/10;
+  tempBtnWidth =  width/15;
+  tempBtnHeight =height/15;
+  
+  img2X = width - width/5;
+  img2Y  = height*7/10;
+  img2Width = width/15;
+  img2Height = height/15;
 
   bgColor = #FFFFFF;
   //bgColor = color( random(255), random(255), random(255) ) ;
@@ -148,6 +166,8 @@ void setup() {
  //DRAWING PAPER
   fill(bgColor);
   rect(paperX, paperY, paperWidth, paperHeight);
+  
+  temp = loadImage("imgs/flowerTemp.png"); 
   
   
 } //End setup()
@@ -218,9 +238,11 @@ void draw() {
   rect(pen4X,pen4Y, pen4Width, pen4Height);
   fill(#ff7788);
   rect(pen4X+25, pen4Y+15, penDiameter, penDiameter);
-
-  
   fill(defaultColor);
+  
+
+  rect(tempBtnX, tempBtnY, tempBtnWidth, tempBtnHeight);
+  image(temp,img2X,img2Y,img2Width,img2Height);
   
   //noStroke();
   stroke(penColor);
@@ -281,7 +303,8 @@ void mousePressed() {
   if (mouseX>color8X && mouseX < color8X + color8Width && mouseY > color8Y && mouseY < color8Y + color8Height) { penColor = color8; penDiameter = width/100; }
   if (mouseX>color9X && mouseX < color9X + color9Width && mouseY > color6Y && mouseY < color9Y + color9Height) { penColor = color9; penDiameter = width/100; }
   if (mouseX>bgColorX && mouseX < bgColorX + bgColorWidth && mouseY > bgColorY && mouseY < bgColorY + bgColorHeight) { 
-    bgColor = color( random(255), random(255), random(255) ) ;
+    //bgColor = color( random(255), random(255), random(255) ) ;
+    bgColor = ( nightMode==true ) ? color( random(255), random(255), random(0,100) ) : color( random(255), random(255), random(255) ) ; 
     fill(bgColor);
     rect(paperX, paperY, paperWidth, paperHeight);
     penColor = bgColor;
@@ -292,6 +315,13 @@ void mousePressed() {
     penDiameter = width/50; 
   }
   
+  if (mouseX > tempBtnX && mouseX < tempBtnX + tempBtnWidth && mouseY > tempBtnY && mouseY < tempBtnY + tempBtnHeight) {
+     image(temp, imageX1, imageY1, picWidthAdjusted1, picHeightAdjusted1);
+      
+      
+ 
+  }
+
   
   
   

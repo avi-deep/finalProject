@@ -228,28 +228,10 @@ void mousePressed() {
   //  }
   // } //END
    
-    
-  //if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) {
-  //  if (draw == true) {
-  //    draw1 = true;
-  //    draw = false;
-  //  } else {
-  //    draw1 = false;
-  //     draw = true;
-  //  }
-    
-  //   if (draw1 == true) {
-  //    draw1 = false;
-  //    draw = true;
-  //  } else {
-  //    draw1 = true;
-  //     draw = false;
-  //  }
-  // }
+   if (mouseX>paperX && mouseX< paperX + paperWidth && mouseY> paperY && mouseY< paperY + paperHeight) { 
+   if (draw2 == true) { draw2 = false; } else { draw2 = true; draw1 = false; draw = false;}
+   }
   
- 
-   
-   
    if (mouseX>pen2X && mouseX < pen2X + pen2Width && mouseY >pen2Y && mouseY < pen2Y + pen2Height) {
      if (draw1 == true) { draw1 = false; } else { draw1 = true; draw2 = false; draw = false;}
    }
